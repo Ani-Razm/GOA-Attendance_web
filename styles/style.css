@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --primary-color: #40be96;
+  --secondary-color: #f1f2f3;
+  --red_color: #f35d5d;
+
+  --color-mountain-meadow-50: #eefbf6;
+  --color-mountain-meadow-100: #d6f5e6;
+  --color-mountain-meadow-200: #b0ead2;
+  --color-mountain-meadow-300: #5ccca5;
+  --color-mountain-meadow-500: #23a680;
+  --color-mountain-meadow-600: #168568;
+  --color-mountain-meadow-700: #116b55;
+  --color-mountain-meadow-800: #105545;
+  --color-mountain-meadow-900: #0e463a;
+  --color-mountain-meadow-950: #072721;
+}
+
+* {
+  font-family: Lexend, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f4f4f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  height: 100vh;
+}
+
+header {
+  padding: 20px 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 14px;
+  background-color: rgb(218, 218, 218);
+  cursor: pointer;
+}
+
+
+a {
+  text-decoration: none;
+  padding: 7px 10px !important;
+  font-size: 14px;
+}
+
+section {
+  min-width: 900px;
+  margin: 20px;
+}
+
+.charts {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.charts>div {
+  width: 50%;
+  height: 250px;
+  border-radius: 10px;
+  background-color: var(--color-mountain-meadow-300);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.chart {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background:
+    radial-gradient(var(--color-mountain-meadow-300) 0% 40%,
+      transparent 40% 100%),
+    conic-gradient(var(--red_color) 0% 100%,
+      var(--color-mountain-meadow-700) 100% 100%);
+  transition: all ease 0.2s;
+}
+
+.charts i {
+  font-size: 100px;
+}
+
+.attendance-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+h1 {
+  text-align: center;
+  cursor: pointer;
+}
+
+h1 i {
+  color: var(--primary-color);
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.welcome-message {
+  line-height: 1.4;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 17px;
+  color: #555;
+
+}
+
+.welcome-message h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 45%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+button,
+a {
+  padding: 10px 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
+
+button:hover,
+a:hover {
+  background-color: var(--color-mountain-meadow-500);
+}
+
+#currentDate {
+  color: var(--primary-color);
+}
+
+table,
+tr {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  font-weight: 300;
+  border: 1px solid #e0e0e0;
+}
+
+table td:nth-child(1),
+table th:nth-child(1) {
+  width: 45%;
+}
+
+table th {
+  font-weight: 600;
+  background-color: var(--secondary-color);
+}
+
+table tr:nth-child(even) {
+  background-color: var(--secondary-color);
+}
+
+table td button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button.present {
+  background-color: var(--primary-color);
+}
+
+button.absent {
+  background-color: #8b8b8b;
+}
+
+.delete {
+  margin: 15px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--red_color);
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete:hover {
+  background-color: #c22f2f;
+}
+
+.bx.bxs-edit-alt {
+  margin: 0 10px;
+  background: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}

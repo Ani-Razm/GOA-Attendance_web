@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #40be96;
+    --secondary-color: #eee;
+    --red_color: #f35d5d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-color);
+    font-family: Lexend, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    padding: 40px 40px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.384);
+    width: 400px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+header {
+    margin-bottom: 50px;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    margin-right: 5px;
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 20px;
+    width: 70%;
+    ;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+button:hover {
+    background-color: #59b7ab;
+}
+
+input {
+    background-color: var(--secondary-color);
+    padding: 10px;
+    width: 100%;
+    border: none;
+}
+
+span {
+    color: rgb(153, 153, 153);
+    font-size: 0.8rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+
+}
+
+p {
+    color: var(--red_color);
+    font-size: 12px;
+    margin: 0;
+}
