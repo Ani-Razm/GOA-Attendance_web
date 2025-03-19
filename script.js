@@ -1,5 +1,22 @@
 const addStudentBtn = document.querySelector('#addStudent');
 
+
+// get attendance data for current user
+var attendanceData = JSON.parse(localStorage.getItem('users'));
+
+const users = JSON.parse(localStorage.getItem('users')) || [];
+const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+
+
+for (let user of users) {
+  if (currentUser.email == user.email) {
+    attendanceData = user.students;
+  }
+}
+
+// change account div
+document.querySelector('.avatar p').textContent = currentUser.name[0] + " " + currentUser.surname[0]  ;
+
 addStudentBtn.addEventListener('click', () => {
   addStudentToLocalStorage();
   renderTable(loadAttedanceForDate(document.querySelector('#attendanceDate').value));
@@ -20,13 +37,11 @@ function addStudentToLocalStorage() {
     return;
   }
 
-  const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
-
   if (!attendanceData[date]) {
     attendanceData[date] = [];
   }
 
-  attendanceData[date].push({ name: name, status: 'absent'})
+  attendanceData[date].push({ name: name, status: 'absent' })
 
   document.querySelector('#studentName').value = '';
 
@@ -35,7 +50,6 @@ function addStudentToLocalStorage() {
 
 // function to load attendance from specific date
 function loadAttedanceForDate(date) {
-  
   const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
 
   if (!attendanceData[date]) {
@@ -47,8 +61,6 @@ function loadAttedanceForDate(date) {
 }
 
 function toggleAttendance(date, index) {
-  const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
-
   const status = attendanceData[date][index].status === 'present' ? 'absent' : 'present';
   attendanceData[date][index].status = status;
 
@@ -81,14 +93,14 @@ function renderTable(data) {
       nameCell.replaceChild(input, nameSpan);
 
       input.addEventListener('blur', () => {
-      nameSpan.textContent = input.value;
-      nameCell.replaceChild(nameSpan, input);
+        nameSpan.textContent = input.value;
+        nameCell.replaceChild(nameSpan, input);
 
-      // update name in local storage
-      const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
-      const date = document.getElementById('attendanceDate').value;
-      attendanceData[date][index].name = input.value;
-      localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
+        // update name in local storage
+        const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+        const date = document.getElementById('attendanceDate').value;
+        attendanceData[date][index].name = input.value;
+        localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
       });
     });
 
@@ -114,7 +126,7 @@ function renderTable(data) {
 
       renderTable(loadAttedanceForDate(document.getElementById('attendanceDate').value));
     }
- ) 
+    )
 
     // adding elements on website
     deleteBtn.appendChild(icon);
@@ -136,7 +148,6 @@ function renderTable(data) {
 
 function UpdatePieChart() {
   const date = document.getElementById('attendanceDate').value;
-  const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
   // change pie chart
 
   if (!attendanceData[date] || attendanceData[date].length == 0) {
@@ -148,7 +159,7 @@ function UpdatePieChart() {
       var(--color-mountain-meadow-700) 100% 100%)`;
     return;
   }
-  
+
   let studentsAbsent = 0;
   let studentsPresent = 0;
 
@@ -178,12 +189,12 @@ function UpdatePieChart() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const dateInput = document.getElementById('attendanceDate');
-  const today = new Date().toISOString().split('T')[0]; 
+  const today = new Date().toISOString().split('T')[0];
   dateInput.value = today;
 
   const currentDate = document.querySelector('#currentDate');
   currentDate.textContent = dateInput.value;
- 
+
   renderTable(loadAttedanceForDate(today));
   UpdatePieChart();
 
@@ -193,3 +204,20 @@ document.addEventListener('DOMContentLoaded', () => {
     UpdatePieChart()
   });
 });
+
+document.querySelector('.logOut').addEventListener('click', () => {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+
+  for (let user of users) {
+    if (user.email == currentUser.email) {
+      user.students = attendanceData;
+    }
+  }
+
+  localStorage.setItem('users', JSON.stringify(users)); // Save updated users array
+  localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
+  localStorage.setItem('currentUser', "");
+
+})

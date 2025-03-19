@@ -7,16 +7,16 @@ document.querySelector('button').addEventListener('click', (e) => {
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
 
-    users.forEach((user) => {
+    for(let user of users){
         if (email == user.email && password == user.password) {
-            // localStorage.setItem('currentUser', JSON.stringify(user));
-            // localStorage.setItem('attendanceData', JSON.stringify(user.students));
-            window.location.assign("/index.html");
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('attendanceData', JSON.stringify(user.students));
+            window.location.assign("/main.html");
             return;
         }
-    })
+    }
 
     const alertP = document.querySelector('p');
-    alertP.textContent = 'this user does not exist';
+    alertP.textContent = 'this user does not exist or incorrect password';
     alertP.style.color = 'red';
 })

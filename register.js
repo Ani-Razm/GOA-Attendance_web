@@ -1,3 +1,4 @@
+document.querySelector('.passwordAlert').textContent = '';
 document.querySelector('button').addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -6,9 +7,22 @@ document.querySelector('button').addEventListener('click', (e) => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    if (name && surname && email && password) {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
 
-    users.push({name: name, surname: surname, email: email, password: password, students: {}});
+        for(let user of users){
+            if (email == user.email) {
+                document.querySelector('.passwordAlert').textContent = 'this user already exists';
+                document.querySelector('.passwordAlert').style.color = 'red';
+                return;
+            }
+        }
 
-    localStorage.setItem('users', JSON.stringify(users));
+        users.push({ name: name, surname: surname, email: email, password: password, students: {} });
+
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('you are registered');
+    } else {
+        alert('please fill all fields')
+    }
 })

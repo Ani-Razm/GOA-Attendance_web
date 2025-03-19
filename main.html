@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOA Student Attendance Tracker</title>
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="icon" href="/imgs/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+
+<body>
+
+  <header>
+    <h1><i class='bx bx-trending-up'></i>GOA</h1>
+
+    <div class="account">
+      <a href="index.html" class="logOut">Log Out</a>
+
+      <div class="avatar" title='ani razmadze'>
+        <p>A R</p>
+      </div>
+    </div>
+
+  </header>
+
+  <main>
+    <section class="welcome-message">
+      <h2>Welcome to the GOA Student Attendance Tracker!</h2>
+      <p>Track and manage student attendance efficiently and effortlessly.</p>
+    </section>
+
+    <section class="charts">
+      <div class="totalStudents">
+        <i class='bx bxs-graduation'></i>
+        <h3>Total Students</h3>
+        <p id="totalStudents">0</p>
+      </div>
+
+      <div class="totalAttendance">
+        <div class="chart"></div>
+        <h3>Total Attendance</h3>
+        <p id="totalAttendance">0%</p>
+    </section>
+
+
+    <section class="attendance-section">
+      <div class="form">
+        <input type="date" id="attendanceDate" />
+        <input type="text" id="studentName" placeholder="Enter student name" />
+        <button id="addStudent">Add Student</button>
+      </div>
+
+      <h2>Attendance for <span id="currentDate">Select a Date</span></h2>
+
+      <table id="attendanceTable">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Attendance</th>
+            <!-- <th>score</th> -->
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Attendance records -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
