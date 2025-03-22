@@ -1,11 +1,10 @@
 const addStudentBtn = document.querySelector('#addStudent');
 
-
 // get attendance data for current user
-var attendanceData = JSON.parse(localStorage.getItem('users'));
+let attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
 
-const users = JSON.parse(localStorage.getItem('users')) || [];
-const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+let users = JSON.parse(localStorage.getItem('users')) || [];
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
 
 
 for (let user of users) {
@@ -15,14 +14,15 @@ for (let user of users) {
 }
 
 // change account div
-document.querySelector('.avatar p').textContent = currentUser.name[0] + " " + currentUser.surname[0]  ;
+document.querySelector('.avatar p').textContent = currentUser.name[0] + " " + currentUser.surname[0];
+document.querySelector('.avatar p').title = `user: ${currentUser.name} ${currentUser.surname} \nemail: ${currentUser.email}`;
 
 addStudentBtn.addEventListener('click', () => {
   addStudentToLocalStorage();
   renderTable(loadAttedanceForDate(document.querySelector('#attendanceDate').value));
 })
 
-// Function to add student in the local storage 
+// Function to validate inputs and add student in the local storage
 function addStudentToLocalStorage() {
   const date = document.querySelector('#attendanceDate').value;
   const name = document.querySelector('#studentName').value;
@@ -46,11 +46,12 @@ function addStudentToLocalStorage() {
   document.querySelector('#studentName').value = '';
 
   localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
+  // Save updated users array
 }
 
 // function to load attendance from specific date
 function loadAttedanceForDate(date) {
-  const attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
+  attendanceData = JSON.parse(localStorage.getItem('attendanceData')) || {};
 
   if (!attendanceData[date]) {
     attendanceData[date] = [];
@@ -121,12 +122,14 @@ function renderTable(data) {
 
     deleteBtn.addEventListener('click', () => {
       const attendanceData = JSON.parse(localStorage.getItem('attendanceData'));
-      attendanceData[document.getElementById('attendanceDate').value].splice(index, 1);
+      const date = document.getElementById('attendanceDate').value;
+      attendanceData[date].splice(index, 1);
       localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
 
+      UpdatePieChart();
+
       renderTable(loadAttedanceForDate(document.getElementById('attendanceDate').value));
-    }
-    )
+    })
 
     // adding elements on website
     deleteBtn.appendChild(icon);
@@ -144,12 +147,13 @@ function renderTable(data) {
     tbody.appendChild(row);
     UpdatePieChart();
   });
+
 }
 
 function UpdatePieChart() {
   const date = document.getElementById('attendanceDate').value;
-  // change pie chart
 
+  // change pie chart
   if (!attendanceData[date] || attendanceData[date].length == 0) {
     document.querySelector('#totalAttendance').textContent = '0%';
     document.querySelector('#totalStudents').textContent = 0;
@@ -219,5 +223,4 @@ document.querySelector('.logOut').addEventListener('click', () => {
   localStorage.setItem('users', JSON.stringify(users)); // Save updated users array
   localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
   localStorage.setItem('currentUser', "");
-
 })
